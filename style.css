@@ -34,6 +34,7 @@ body, html {
     height: 20px;
     border-radius: 50%;
     cursor: pointer;
+    clip-path: polygon(20% 0, 6% 100%, 41% 100%, 36% 32%, 45% 32%, 53% 60%, 29% 60%, 23% 71%, 100% 100%, 43% 0);
 }
 
 .element1 {
