@@ -111,11 +111,6 @@
         let currentElement = null;
         let bg = null;
         
-elements.forEach((elem) => {
-        elem.addEventListener("dragstart", dragstart);
-        elem.addEventListener("dragend", dragend);
-});
-
 
         elements.forEach(elem => {
             elem.addEventListener('mousedown', (e) => {
@@ -127,7 +122,6 @@ elements.forEach((elem) => {
 
   target.addEventListener("dragover", dragover);
   target.addEventListener("drop", drop);
-
 
 
 function dragover(e) {
@@ -148,13 +142,13 @@ function drop(e) {
   currentElement.style.display = 'none';
 }
 
-        function blendColors(color1, color2) {
-            const rgb1 = color1.match(/\d+/g);
-            const rgb2 = color2.match(/\d+/g);
+function blendColors(color1, color2) {
+        const rgb1 = color1.match(/\d+/g);
+        const rgb2 = color2.match(/\d+/g);
 
-            const r = Math.round((parseInt(rgb1[0]) + parseInt(rgb2[0]))) / 2;
-            const g = Math.round((parseInt(rgb1[1]) + parseInt(rgb2[1]))) / 2;
-            const b = Math.round((parseInt(rgb1[2]) + parseInt(rgb2[2]))) / 2;
+        const r = Math.round((parseInt(rgb1[0]) + parseInt(rgb2[0]))) / 2;
+        const g = Math.round((parseInt(rgb1[1]) + parseInt(rgb2[1]))) / 2;
+        const b = Math.round((parseInt(rgb1[2]) + parseInt(rgb2[2]))) / 2;
 
-            return `rgb(${r}, ${g}, ${b})`;
-        }
+        return `rgb(${r}, ${g}, ${b})`;
+}
