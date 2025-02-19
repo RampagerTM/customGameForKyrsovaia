@@ -112,9 +112,7 @@
         let bg = null;
         
 elements.forEach((elem) => {
-        // Обработчик начала перетаскивания элемента
         elem.addEventListener("dragstart", dragstart);
-        // Обработчик завершения перетаскивания элемента
         elem.addEventListener("dragend", dragend);
 });
 
@@ -122,75 +120,41 @@ elements.forEach((elem) => {
         elements.forEach(elem => {
             elem.addEventListener('mousedown', (e) => {
                 bg = getComputedStyle(elem);
-                console.log(bg.backgroundColor);
                 currentElement = elem;
             });
         });
 
 
-  // Когда заходим элементом в бокс
   target.addEventListener("dragover", dragover);
-  // Когда отпускаем элемент на нужном боксе
   target.addEventListener("drop", drop);
-  // Когда достигаем бокс
-  target.addEventListener("dragenter", dragenter);
-  // Когда покидаем бокс
-  target.addEventListener("dragleave", dragleave);
 
 
-// Функция начала перетаскивания элемента
-function dragstart(e) {
-  // Меняем цвет на фиолетовый
-  e.target.classList.add("item--hold");
-  // Удаляем элемент из бокса
-  setTimeout(() => e.target.classList.add("item--hide"), 0);
-}
-
-// Функция завершения перетаскивания элемента
-function dragend(e) {
-  // Меняем цвет на синий
-  e.target.classList.remove("item--hold");
-  // Возвращаем элемент обратно
-  e.target.classList.remove("item--hide");
-}
 
 function dragover(e) {
   e.preventDefault();
 }
 
 function drop(e) {
-  // Добавляем наш элемент в нужный бокс
   target.append(currentElement);
-  //target.style.backgroundColor = bg.backgroundColor;
-  if(target.style.backgroundColor !== 'rgb(255, 0, 0)' && target.style.backgroundColor !== 'rgb(0, 0, 255)' && target.style.backgroundColor !== 'rgb(0, 128, 0)')
+  if(target.style.backgroundColor == 0)
   {
         target.style.backgroundColor = bg.backgroundColor;
   }
   else
   {
-        console.log(target.style.backgroundColor);
-        let newColor;
+        target.style.backgroundColor = blendColors(target.style.backgroundColor, bg.backgroundColor); 
   }
+  
   currentElement.style.display = 'none';
 }
 
-function dragenter(e) {
-  // Добавляем желтую подсветку
-  e.target.classList.add("box--hovered");
-}
+        function blendColors(color1, color2) {
+            const rgb1 = color1.match(/\d+/g);
+            const rgb2 = color2.match(/\d+/g);
 
-function dragleave(e) {
-  // Убираем желтую подсветку
-  e.target.classList.remove("box--hovered");
-}
+            const r = Math.round((parseInt(rgb1[0]) + parseInt(rgb2[0]))) / 2;
+            const g = Math.round((parseInt(rgb1[1]) + parseInt(rgb2[1]))) / 2;
+            const b = Math.round((parseInt(rgb1[2]) + parseInt(rgb2[2]))) / 2;
 
-        // function blendColors(color1, color2) {
-        //     const rgb1 = color1.match(/\d+/g);
-        //     const rgb2 = color2.match(/\d+/g);
-
-        //     const r = Math.round((parseInt(rgb1[0]) + parseInt(rgb2[0]))) / 2;
-        //     const g = Math.round((parseInt(rgb1[1]) + parseInt(rgb2[1]))) / 2;
-        //     const b = Math.round((parseInt(rgb1[2]) + parseInt(rgb2[2]))) / 2;
-
-        //     return `rgb(${r}, ${g}, ${b})`;
-        // }
+            return `rgb(${r}, ${g}, ${b})`;
+        }
