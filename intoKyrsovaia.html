@@ -60,15 +60,15 @@
         width: 100px;
     }
     .element1{
-        color: #e8c62d;
+        color: yellow;
         cursor: pointer;
     }
     .element2{
-        color: #941414;
+        color: red;
         cursor: pointer;
     }
     .element3{
-        color: #07c1eb;
+        color: blue;
         cursor: pointer;
     }
 </style>
@@ -128,14 +128,12 @@ function drop(e) {
         score++;
         currentElement.style.display = 'none';
         obod.style.backgroundColor = bg.color;
-        note.textContent = `Element${score} (${currentElement.style.color}) -> Target (${obod.style.backgroundColor})`;
   }
   else
   {
         score++;
         currentElement.style.display = 'none';
-        obod.style.backgroundColor = blendColors(obod.style.backgroundColor, bg.backgroundColor); 
-        note.textContent = `Element${score} (${currentElement.style.color}) -> Target (${obod.style.backgroundColor})`;
+        obod.style.backgroundColor = blendColors(obod.style.backgroundColor, bg.color); 
   }
   
 
@@ -148,7 +146,7 @@ function blendColors(color1, color2) {
         const r = Math.round((parseInt(rgb1[0]) + parseInt(rgb2[0]))) / 2;
         const g = Math.round((parseInt(rgb1[1]) + parseInt(rgb2[1]))) / 2;
         const b = Math.round((parseInt(rgb1[2]) + parseInt(rgb2[2]))) / 2;
-
+        console.log(`rgb(${r}, ${g}, ${b})`);
         return `rgb(${r}, ${g}, ${b})`;
 }
 </script>
